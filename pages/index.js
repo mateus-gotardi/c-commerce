@@ -12,7 +12,7 @@ export default function Home() {
   function submitProduct() {
     let data = { name, price, description, bar_code };
     axios
-      .post("/api/sendproduct", data)
+      .post("/api/products/sendproduct", data)
       .then((response) => {
         console.log(response);
       })
@@ -73,7 +73,7 @@ export default function Home() {
         onChange={(e) => setTags(e.target.value)}
       ></input>
       <button onClick={submitProduct}>Cadastrar Produto</button>
-      <UploadImages />
+      <UploadImages productid='2'/>
     </div>
   );
 }

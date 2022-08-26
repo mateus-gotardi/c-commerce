@@ -6,7 +6,7 @@ import ProductImages from "../models/ProductImages";
 CartItem.hasMany(Products);
 CartItem.belongsTo(Users);
 
-ProductImages.belongsTo(Products);
-Products.hasMany(ProductImages);
+ProductImages.belongsTo(Products, { onDelete: "CASCADE", onUpdate: "CASCADE" });
+Products.hasMany(ProductImages, { onDelete: "CASCADE", onUpdate: "CASCADE" });
 
 export { Products, Users, CartItem, ProductImages };

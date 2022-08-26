@@ -1,6 +1,7 @@
 import Products from "../../../models/Products";
 
 export default async (req, res) => {
+  console.log(req)
   if (req.method === "POST") {
     try {
       console.log("req nom", req.body);

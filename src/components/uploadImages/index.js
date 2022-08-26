@@ -3,16 +3,18 @@ import axios from "axios";
 
 const UploadImages = (props) => {
   const [images, setImages] = useState([]);
-  const [alt, setAlt] = useState('');
+  const [alt, setAlt] = useState("");
   const uploadImages = (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append('image', images)
+    const infos = JSON.stringify({ alt, productid: props.productid });
+    formData.append("file", images);
+    formData.append("info", infos);
     const headers = {
-        'headers':{
-            'Content-Type': 'application/json',
-        }
-    }
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
     axios
       .post("/api/products/uploadimages", formData, headers)
       .then((response) => {
@@ -21,23 +23,30 @@ const UploadImages = (props) => {
       .catch((e) => {
         console.log(e);
       });
-
-    console.log(typeof images);
     console.log(images);
   };
 
   return (
     <div>
       <form onSubmit={uploadImages}>
-        <label to="images">Upload de imagens</label>
+        <label to="file">Upload de imagens</label>
         <input
+          required
           type="file"
           id="imageInput"
-          accept=".png .jpeg .webp .jpg"
-          name="image"
+          name="file"
           onChange={(e) => setImages(e.target.files[0])}
         />
-        <input type='text' value={alt} ></input>
+        <br />
+        <label>Texto alternativo</label>
+        <input
+          placeholder="alt"
+          required
+          type="text"
+          value={alt}
+          onChange={(e) => setAlt(e.target.value)}
+        ></input>
+        <br />
         <button type="submit">enviar imagens</button>
       </form>
       <div></div>
