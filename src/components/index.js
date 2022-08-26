@@ -1,3 +1,4 @@
+import UploadImages from "./uploadImages"
 const Colors = {
     DarkBlue: '#2b3945', //(Dark Mode Elements)
     VeryDarkBlue: '#202C37', //: (Dark Mode Background):
@@ -6,4 +7,4 @@ const Colors = {
     VeryLightGray: "#FAFAFA",//(Light Mode Background):
     White: '#FFF'//(Dark Mode Text & Light Mode Elements)
 }
-export {Colors}
+export {Colors, UploadImages}
