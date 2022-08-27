@@ -4,6 +4,7 @@ import ShowProducts from "./showProducts";
 import ProductRegister from "./productRegister";
 import ProductDetails from "./productDetails";
 import CartItemsDetails from "./cartItems";
+import Filters from "./filters";
 
 const Colors = {
   DarkBlue: "#2b3945", //(Dark Mode Elements)
@@ -21,4 +22,5 @@ export {
   ProductRegister,
   ProductDetails,
   CartItemsDetails,
+  Filters
 };

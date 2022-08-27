@@ -6,23 +6,7 @@ import { useRouter } from "next/router";
 
 const ShowProducts = (props) => {
   const router = useRouter();
-  const [products, setProducts] = useState(null);
-  const [productImages, setProductImages] = useState(null);
-
-  const getAllProducts = () => {
-    axios
-      .get("/api/products/getall")
-      .then((response) => {
-        setProductImages(response.data.productImages);
-        setProducts(response.data.products);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  };
-  useEffect(() => {
-    getAllProducts();
-  }, []);
+  const { products, productImages } = props;
 
   return (
     <ShowStyle>
@@ -68,7 +52,7 @@ const ShowProducts = (props) => {
               )}
               <h3>{product.name}</h3>
               {tags.map((tag, key) => {
-                return (<span key={key}>{tag}</span>);
+                return <span key={key}>{tag}</span>;
               })}
             </div>
           );

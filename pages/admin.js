@@ -16,6 +16,23 @@ export default function Admin() {
   const [stage, setStage] = useState(0);
   const [showAll, setShowAll] = useState(true);
   const [registeredProduct, setRegisteredProduct] = useState(null);
+  const [products, setProducts] = useState(null);
+  const [productImages, setProductImages] = useState(null);
+
+  const getAllProducts = () => {
+    axios
+      .get("/api/products/getall")
+      .then((response) => {
+        setProductImages(response.data.productImages);
+        setProducts(response.data.products);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+  useEffect(() => {
+    getAllProducts();
+  }, []);
 
   useEffect(() => {
     let token = Cookies.get("token");
@@ -87,6 +104,8 @@ export default function Admin() {
               showFunction={showFunction}
               setShowAll={setShowAll}
               showAll={showAll}
+              products={products}
+              productImages={productImages}
             />
           )}
         </div>

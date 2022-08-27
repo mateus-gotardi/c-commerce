@@ -27,10 +27,7 @@ export const adjustPrice = (price) => {
 };
 
 export const getTags = (productTags) => {
-  console.log(productTags);
   let clean = productTags.replace(/ /gm, "");
-  console.log(clean);
   let tagList = clean.split(",");
-  console.log(tagList);
   return tagList;
 };
