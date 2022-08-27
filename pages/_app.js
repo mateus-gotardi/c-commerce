@@ -21,15 +21,17 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 function MyApp({ Component, pageProps }) {
-  const [darkMode, setDarkMode] = useState(false);
-
+  const [darkMode, setDarkMode] = useState(true);
+  const [userLogged, setUserLogged] = useState(false);
   return (
     <AppContext.Provider
       value={{
         state: {
           darkMode: darkMode,
+          userLogged: userLogged,
         },
         setDarkMode: setDarkMode,
+        setUserLogged: setUserLogged,
       }}
     >
       <link rel="preconnect" href="https://fonts.googleapis.com" />

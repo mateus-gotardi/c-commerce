@@ -1,6 +1,6 @@
 import ProductImages from "../../../models/ProductImages";
 import nc from "next-connect";
-import upload from "../../../src/components/utils/upload";
+import upload from "../../../src/utils/upload";
 import multer from "multer";
 
 const handler = nc({
@@ -23,7 +23,7 @@ const handler = nc({
       link,
     });
     if (productImage) {
-      return res.status(200).json(productImage);
+      return res.status(200).json({ success: true, productImage });
     } else {
       return res
         .status(400)

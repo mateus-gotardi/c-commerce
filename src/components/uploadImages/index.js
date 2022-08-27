@@ -47,7 +47,7 @@ const UploadImages = (props) => {
           onChange={(e) => setAlt(e.target.value)}
         ></input>
         <br />
-        <button type="submit">enviar imagens</button>
+        <button type="submit">enviar imagem</button>
       </form>
       <div></div>
     </div>
