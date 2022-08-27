@@ -9,7 +9,8 @@ const ProductDetails = (props) => {
   const [images, setImages] = useState();
   const [edit, setEdit] = useState(false);
   const [newValue, setNewValue] = useState("");
-  const [tags, setTags] = useState();
+  const [newTags, setNewTags] = useState("");
+  const [tags, setTags] = useState('abc');
 
   const getProduct = () => {
     axios
@@ -18,6 +19,7 @@ const ProductDetails = (props) => {
         setProduct(response.data.product);
         setImages(response.data.productImages);
         setTags(getTags(response.data.product.tags));
+        setNewTags(response.data.product.tags)
       })
       .catch((e) => {
         console.log(e);
@@ -226,6 +228,24 @@ const ProductDetails = (props) => {
             {tags.map((tag, key) => {
               return <span key={key}>{tag}</span>;
             })}
+            {props.admin && (
+              <div>
+                <input
+                  placeholder="Novas Tags"
+                  value={newTags}
+                  name="new price"
+                  onChange={(e) => {
+                    setNewTags(e.target.value);
+                  }}
+                  type="text"
+                ></input>
+                <button
+                  onClick={(e) => editProduct(e, product.id, "tags", newTags)}
+                >
+                  Salvar
+                </button>
+              </div>
+            )}
           </div>
           {props.admin && (
             <div>

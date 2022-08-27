@@ -25,6 +25,12 @@ export default async (req, res) => {
             { where: { id: id } }
           );
           break;
+        case "tags":
+          product = await Products.update(
+            { tags: newValue },
+            { where: { id: id } }
+          );
+          break;
         default:
           break;
       }

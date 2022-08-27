@@ -8,7 +8,7 @@ export default function Home() {
   const [products, setProducts] = useState(null);
   const [productImages, setProductImages] = useState(null);
   const [allTags, setAllTags] = useState();
-  const [tagsFilter, setTagsFilter] = useState(["apple"]);
+  const [tagsFilter, setTagsFilter] = useState([]);
 
   const getAllTags = (products) => {
     let tmpAll = [];
