@@ -7,7 +7,6 @@ import { useRouter } from "next/router";
 const ProductPage = (props) => {
   const router = useRouter();
   const { productid } = router.query;
-  console.log(productid);
   const [token, setToken] = useState("");
   useEffect(() => {
     let tkn = Cookies.get("token");

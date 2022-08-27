@@ -19,6 +19,16 @@ const UploadImages = (props) => {
       .post("/api/products/uploadimages", formData, headers)
       .then((response) => {
         console.log(response);
+        props.setStage(0);
+        setTimeout(() => {
+          props.setStage(1);
+        }, 50);
+        if (props.showAll) {
+          props.setShowAll(false);
+          setTimeout(() => {
+            props.setShowAll(true);
+          }, 100);
+        }
       })
       .catch((e) => {
         console.log(e);

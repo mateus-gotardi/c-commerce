@@ -30,6 +30,7 @@ const ProductRegister = (props) => {
   return (
     <RegisterProdStyle>
       <h1>Cadastrar Novo Produto</h1>
+      <label>Nome:</label>
       <input
         required
         type="text"
@@ -38,7 +39,7 @@ const ProductRegister = (props) => {
         placeholder="Produto"
         onChange={(e) => setName(e.target.value)}
       ></input>
-      <label>{price}</label>
+      <label>Preço:</label>
       <input
         required
         type="number"
@@ -47,6 +48,7 @@ const ProductRegister = (props) => {
         placeholder="Preço"
         onChange={(e) => setPrice(e.target.value)}
       ></input>
+      <label>Descrição:</label>
       <input
         required
         type="text"
@@ -55,6 +57,7 @@ const ProductRegister = (props) => {
         placeholder="Descrição"
         onChange={(e) => setDescription(e.target.value)}
       ></input>
+      <label>Código de barras:</label>
       <input
         required
         type="text"
@@ -63,6 +66,7 @@ const ProductRegister = (props) => {
         placeholder="Código de barras"
         onChange={(e) => setBar_code(e.target.value)}
       ></input>
+      <label>Tags:</label>
       <input
         type="text"
         name="tags"

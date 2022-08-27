@@ -32,6 +32,10 @@ export default function Admin() {
       .post("/api/products/getone", { id: id })
       .then((response) => {
         setRegisteredProduct(response.data.product);
+        setStage(0);
+        setTimeout(() => {
+          setStage(1);
+        },50)
       })
       .catch((e) => {
         console.log(e);
@@ -51,7 +55,7 @@ export default function Admin() {
             <meta name="description" content="Admin Panel" />
             <link rel="icon" href="/favicon.ico" />
           </Head>
-          <Header admin/>
+          <Header admin />
           <button onClick={() => setShowAll(!showAll)}>
             Mostrar todos os produtos
           </button>
@@ -69,13 +73,22 @@ export default function Admin() {
           {stage === 1 && (
             <>
               <ProductDetails
+                setStage={setStage}
                 productid={registeredProduct.id}
                 admin
-                showFunction={showFunction}
+                setShowAll={setShowAll}
+                showAll={showAll}
               />
             </>
           )}
-          {showAll && <ShowProducts admin />}
+          {showAll && (
+            <ShowProducts
+              admin
+              showFunction={showFunction}
+              setShowAll={setShowAll}
+              showAll={showAll}
+            />
+          )}
         </div>
       )}
     </>

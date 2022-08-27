@@ -1,6 +1,6 @@
 export const getUrl = (link) => {
   if (process.env.STORAGE_TYPE === "local") {
-    return "/" + link;
+    return "/upload/products/" + link;
   } else {
     return "https://e-commerce-nextjs.s3.amazonaws.com/" + link;
   }
