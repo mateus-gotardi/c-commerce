@@ -58,11 +58,24 @@ const CartItemsDetails = () => {
         }
       )
       .then((response) => {
-        router.push("/refresh?page=cart");
+        console.log(response.data);
+        setTimeout(() => {
+          router.push("/refresh?page=cart");
+        }, 50);
       })
       .catch((e) => {
         console.log(e);
       });
+  };
+  const removeItemFromLocal = (e, id) => {
+    e.preventDefault();
+    let cartSTR = localStorage.getItem("cart");
+    let cartOBJ = JSON.parse(cartSTR);
+    let index = cartOBJ.indexOf(id);
+    cartOBJ.splice(index, 1);
+    cartSTR = JSON.stringify(cartOBJ);
+    localStorage.setItem("cart", cartSTR);
+    router.push("/refresh?page=cart");
   };
 
   useEffect(() => {
@@ -101,7 +114,9 @@ const CartItemsDetails = () => {
   } else if (cartItems && allProducts) {
     getTotal(cartItems);
   }
+
   const ListOfProducts = (props) => {
+
     return props.cart.map((item, key) => {
       let productToShow = allProducts.products.filter((obj) => {
         if (item.productid) {
@@ -145,9 +160,17 @@ const CartItemsDetails = () => {
                 </div>
               )}
             </div>
-            <button onClick={(e) => removeItemFromLocal(e, item.id)}>
-              Remover
-            </button>
+            {props.local ? (
+              <button
+                onClick={(e) => removeItemFromLocal(e, productToShow[0].id)}
+              >
+                Remover
+              </button>
+            ) : (
+              <button onClick={(e) => removeItemFromDB(e, item.id)}>
+                Remover
+              </button>
+            )}
           </div>
         );
       }
@@ -157,7 +180,7 @@ const CartItemsDetails = () => {
     <CartStyles>
       {cartItems && allProducts && <ListOfProducts cart={cartItems} />}
       {localCartItems && allProducts && (
-        <ListOfProducts cart={localCartItems} />
+        <ListOfProducts cart={localCartItems} local />
       )}
       <h3>Preço Total: R${adjustPrice(totalPrice.toString())}</h3>
     </CartStyles>
