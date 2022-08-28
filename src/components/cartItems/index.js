@@ -1,10 +1,9 @@
 import { CartStyles } from "./styles";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext} from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { getUrl, adjustPrice } from "../../utils/showProductsHelpers";
 import { useRouter } from "next/router";
-import React, { useContext } from "react";
 import AppContext from "../../../AppContext";
 import { Colors } from "..";
 import { MdDeleteForever } from "react-icons/md";

@@ -9,20 +9,23 @@ const login = async (req, res) => {
     if (!user) {
       res
         .status(400)
-        .json({ error: true, message: "User not found, please register" });
+        .json({
+          error: true,
+          message: "E-mail ou senha incorretos",
+        });
     } else {
       user.isCorrectPassword(password, function (err, same) {
         if (!same) {
-          res.status(401).json({ error: "incorrect email or password" });
+          res
+            .status(401)
+            .json({ error: true, message: "E-mail ou senha incorretos" });
         } else {
           const token = jwt.sign({ email }, secret, { expiresIn: "2d" });
-          res
-            .status(200)
-            .json({
-              user: { email: user.email, name: user.name, admin: user.admin },
-              token: token,
-              success: true,
-            });
+          res.status(200).json({
+            user: { email: user.email, name: user.name, admin: user.admin },
+            token: token,
+            success: true,
+          });
         }
       });
     }

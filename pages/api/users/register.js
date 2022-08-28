@@ -20,7 +20,7 @@ const register = async (req, res) => {
     } else {
       res
         .status(400)
-        .json({ error: true, message: "this e-mail is already registered" });
+        .json({ error: true, message: "E-mail já registrado" });
     }
   } else {
     res.status(400).json({ error: true, message: "invalid req method" });
