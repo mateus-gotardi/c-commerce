@@ -106,6 +106,7 @@ export default function Admin() {
               showAll={showAll}
               products={products}
               productImages={productImages}
+              tagsFilter={[]}
             />
           )}
         </div>

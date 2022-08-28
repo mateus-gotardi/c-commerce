@@ -3,6 +3,7 @@ import AppContext from "../../../AppContext";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { HeaderStyles } from "./styles";
 
 const Header = (props) => {
   const router = useRouter();
@@ -26,20 +27,22 @@ const Header = (props) => {
   };
 
   return (
-    <div>
-      <Link href="/">Loja</Link>
-      <button onClick={() => setDarkMode(!darkMode)}>Dark Mode</button>
-      {userLogged ? (
-        <button onClick={logout}>Sair</button>
-      ) : (
-        <>
-          <button onClick={() => router.push("/login")}>Entrar</button>
-          <button onClick={() => router.push("/register")}>Registrar</button>
-        </>
-      )}
-      <Link href='/cart'>Carrinho</Link>
-      {userLogged.admin && <Link href="/admin">Painel de Administrador</Link>}
-    </div>
+    <HeaderStyles>
+      <Link className="Logo" href="/">Loja</Link>
+      <div className="end">
+        <button onClick={() => setDarkMode(!darkMode)}>Dark Mode</button>
+        {userLogged ? (
+          <button onClick={logout}>Sair</button>
+        ) : (
+          <>
+            <button onClick={() => router.push("/login")}>Entrar</button>
+            <button onClick={() => router.push("/register")}>Registrar</button>
+          </>
+        )}
+        <Link href="/cart">Carrinho</Link>
+        {userLogged.admin && <Link href="/admin">Painel de Administrador</Link>}
+      </div>
+    </HeaderStyles>
   );
 };
 export default Header;

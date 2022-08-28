@@ -9,6 +9,7 @@ export default function Home() {
   const [productImages, setProductImages] = useState(null);
   const [allTags, setAllTags] = useState();
   const [tagsFilter, setTagsFilter] = useState([]);
+  const [refresh, setRefresh] = useState(false);
 
   const getAllTags = (products) => {
     let tmpAll = [];
@@ -51,9 +52,15 @@ export default function Home() {
           allTags={allTags}
           tagsFilter={tagsFilter}
           setTagsFilter={setTagsFilter}
+          setRefresh={setRefresh}
         />
       )}
-      <ShowProducts products={products} productImages={productImages} tagsFilter={tagsFilter}/>
+      <ShowProducts
+        products={products}
+        productImages={productImages}
+        tagsFilter={tagsFilter}
+        refresh={refresh}
+      />
     </div>
   );
 }

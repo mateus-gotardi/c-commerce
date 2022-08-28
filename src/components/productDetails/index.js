@@ -10,7 +10,7 @@ const ProductDetails = (props) => {
   const [edit, setEdit] = useState(false);
   const [newValue, setNewValue] = useState("");
   const [newTags, setNewTags] = useState("");
-  const [tags, setTags] = useState('abc');
+  const [tags, setTags] = useState("abc");
 
   const getProduct = () => {
     axios
@@ -19,7 +19,7 @@ const ProductDetails = (props) => {
         setProduct(response.data.product);
         setImages(response.data.productImages);
         setTags(getTags(response.data.product.tags));
-        setNewTags(response.data.product.tags)
+        setNewTags(response.data.product.tags);
       })
       .catch((e) => {
         console.log(e);
@@ -229,6 +229,18 @@ const ProductDetails = (props) => {
               return <span key={key}>{tag}</span>;
             })}
             {props.admin && (
+              <div>
+                <button
+                  onClick={() => {
+                    setNewValue("");
+                    edit !== "tags" ? setEdit("tags") : setEdit(false);
+                  }}
+                >
+                  Editar Tags
+                </button>
+              </div>
+            )}
+            {edit === "tags" && (
               <div>
                 <input
                   placeholder="Novas Tags"

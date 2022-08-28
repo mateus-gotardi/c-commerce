@@ -13,6 +13,8 @@ const Filters = (props) => {
       tmpTags.push(tag);
     }
     props.setTagsFilter(tmpTags);
+    props.setRefresh(true)
+    setTimeout(()=>{props.setRefresh(false)},50)
   };
 
   return (
