@@ -4,8 +4,14 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { getUrl, adjustPrice } from "../../utils/showProductsHelpers";
 import { useRouter } from "next/router";
+import React, { useContext } from "react";
+import AppContext from "../../../AppContext";
+import { Colors } from "..";
+import { MdDeleteForever } from "react-icons/md";
 
 const CartItemsDetails = () => {
+  const value = useContext(AppContext);
+  let { darkMode } = value.state;
   const router = useRouter();
   const [token, setToken] = useState();
   const [allProducts, setAllProducts] = useState();
@@ -116,7 +122,6 @@ const CartItemsDetails = () => {
   }
 
   const ListOfProducts = (props) => {
-
     return props.cart.map((item, key) => {
       let productToShow = allProducts.products.filter((obj) => {
         if (item.productid) {
@@ -134,41 +139,51 @@ const CartItemsDetails = () => {
       });
       if (productToShow.length > 0) {
         return (
-          <div key={key}>
+          <div key={key} className="product">
             <div
               className="cart-product"
               onClick={() =>
                 router.push("/product?productid=" + productToShow[0].id)
               }
             >
-              <h2>{productToShow[0].name}</h2>
-              <div className="image-container">
+              <div className="image">
                 {image.length > 0 ? (
                   <img src={getUrl(image[0].link)} alt={image.alt}></img>
                 ) : (
                   <img src="/placeholder.png" alt="placeholder"></img>
                 )}
               </div>
-              {productToShow[0].activePromotion ? (
-                <div>
-                  <h2>{adjustPrice(productToShow[0].promotionPrice)}</h2>
-                  <h3>{adjustPrice(productToShow[0].price)}</h3>
-                </div>
-              ) : (
-                <div>
-                  <h2>{adjustPrice(productToShow[0].price)}</h2>
-                </div>
-              )}
+              <div className="details">
+                {productToShow[0].activePromotion ? (
+                  <div>
+                    <h2>{adjustPrice(productToShow[0].promotionPrice)}</h2>
+                    <h3>{adjustPrice(productToShow[0].price)}</h3>
+                  </div>
+                ) : (
+                  <div>
+                    <h2 className="price">
+                      {adjustPrice(productToShow[0].price)}
+                    </h2>
+                  </div>
+                )}
+                <h2 className="product-name">{productToShow[0].name}</h2>
+              </div>
             </div>
             {props.local ? (
               <button
                 onClick={(e) => removeItemFromLocal(e, productToShow[0].id)}
+                className="remove-btn"
               >
-                Remover
+                <MdDeleteForever />
+                <span>Remover Item</span>
               </button>
             ) : (
-              <button onClick={(e) => removeItemFromDB(e, item.id)}>
-                Remover
+              <button
+                onClick={(e) => removeItemFromDB(e, item.id)}
+                className="remove-btn"
+              >
+                <MdDeleteForever />
+                <span>Remover Item</span>
               </button>
             )}
           </div>
@@ -177,12 +192,22 @@ const CartItemsDetails = () => {
     });
   };
   return (
-    <CartStyles>
-      {cartItems && allProducts && <ListOfProducts cart={cartItems} />}
-      {localCartItems && allProducts && (
-        <ListOfProducts cart={localCartItems} local />
-      )}
-      <h3>Preço Total: R${adjustPrice(totalPrice.toString())}</h3>
+    <CartStyles Colors={Colors} darkMode={darkMode}>
+      <div className="headers">
+        <h3>
+          Preço Total: <span>R${adjustPrice(totalPrice.toString())}</span>
+        </h3>
+        <button>
+          <p>Finalizar Compra</p>
+        </button>
+      </div>
+
+      <div className="products-container">
+        {cartItems && allProducts && <ListOfProducts cart={cartItems} />}
+        {localCartItems && allProducts && (
+          <ListOfProducts cart={localCartItems} local />
+        )}
+      </div>
     </CartStyles>
   );
 };

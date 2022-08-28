@@ -29,6 +29,9 @@ export const HeaderStyles = styled.div`
     justify-content: space-between;
     gap: 0.5rem;
   }
+  .span-link{
+    font-size: .9rem;
+  }
   #menu {
     display: none;
   }
@@ -50,6 +53,7 @@ export const HeaderStyles = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: .9rem;
     a {
       padding: 1px 6px 1px 6px;
     }

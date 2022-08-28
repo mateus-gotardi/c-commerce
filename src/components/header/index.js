@@ -49,7 +49,7 @@ const Header = (props) => {
   return (
     <HeaderStyles Colors={Colors} darkMode={darkMode}>
       <button onClick={() => router.push("/")} className="menuItem">
-        <ShopLogo size="30" darkMode={darkMode} Colors={Colors} />
+        <ShopLogo size="25" darkMode={darkMode} Colors={Colors} />
       </button>
       <nav id={`nav${burger}`} className={burger}>
         <div id={burger}>
@@ -87,7 +87,7 @@ const Header = (props) => {
           <div className="menuItem">
             <Link href="/cart">
               <div className="cart">
-                <AiOutlineShoppingCart /> <span>Carrinho</span>
+                <AiOutlineShoppingCart /> <span className='span-link'>Carrinho</span>
               </div>
             </Link>
           </div>
@@ -95,7 +95,7 @@ const Header = (props) => {
             <Link href="/admin">
               <div className="cart menuItem">
                 <MdAdminPanelSettings />
-                <span>Painel de Administrador</span>
+                <span className='span-link'>Painel de Administrador</span>
               </div>
             </Link>
           )}

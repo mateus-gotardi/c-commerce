@@ -52,7 +52,7 @@ export const ShowStyle = styled.div`
   }
   .product-name {
     font-weight: 400;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     margin: 1rem 0 1rem 0;
   }
   display: flex;
