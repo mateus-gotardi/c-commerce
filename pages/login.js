@@ -20,7 +20,7 @@ const Login = () => {
     if (cart) {
       cart = JSON.parse(cart);
       cart.map((item) => {
-        console.log(item)
+        console.log(item);
         let data = { productid: item };
         axios
           .post("/api/users/cart", data, {
@@ -62,7 +62,7 @@ const Login = () => {
   return (
     <>
       <Head>
-        <title>Loja Virtual</title>
+        <title>Login - Organizações Tabajara</title>
         <meta
           name="description"
           content="homepage for the e-commerce website"

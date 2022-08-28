@@ -40,6 +40,7 @@ export const DetailsStyle = styled.div`
     justify-content: flex-start;
   }
   .image-container {
+    cursor: pointer;
     width: 30%;
     img {
       width: 100%;

@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Header, ProductDetails } from "../src/components";
 import { useRouter } from "next/router";
+import Head from "next/head";
+
 const ProductPage = () => {
   const router = useRouter();
   const { productid } = router.query;
@@ -45,6 +47,11 @@ const ProductPage = () => {
   };
   return (
     <div>
+      <Head>
+        <title> Detalhes do Produto - Organizações Tabajara</title>
+        <meta name="description" content="Admin Panel" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <Header></Header>
       {productid && (
         <>

@@ -251,7 +251,7 @@ const ProductDetails = (props) => {
                     <p>
                       {showCompleteDescription
                         ? product.description
-                        : shortDescription}
+                        : <>{shortDescription}...</>}
                     </p>
                     <span
                       className="showCompleteDescription"
@@ -260,9 +260,9 @@ const ProductDetails = (props) => {
                       }
                     >
                       {showCompleteDescription ? (
-                        <>Ocultar descrição completa...</>
+                        <>Ocultar descrição completa</>
                       ) : (
-                        <>Mostrar descrição completa...</>
+                        <>Mostrar descrição completa</>
                       )}
                     </span>
                   </>

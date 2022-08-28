@@ -38,7 +38,7 @@ const Register = () => {
   return (
     <>
       <Head>
-        <title>Loja Virtual</title>
+        <title>Registrar - Organizações Tabajara</title>
         <meta
           name="description"
           content="homepage for the e-commerce website"
