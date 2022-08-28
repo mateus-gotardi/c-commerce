@@ -71,7 +71,7 @@ export const CartStyles = styled.div`
   }
   .product-name {
     font-weight: 400;
-    font-size: 1.1rem;
+    font-size: 1rem;
     margin: 1rem 0 1rem 0;
   }
   .remove-btn {

@@ -1,8 +1,13 @@
 import { RegisterProdStyle } from "./styles";
 import { useState } from "react";
 import axios from "axios";
+import AppContext from "../../../AppContext";
+import React, { useContext } from "react";
+import { Colors } from "..";
 
 const ProductRegister = (props) => {
+  const value = useContext(AppContext);
+  let { darkMode } = value.state;
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
@@ -13,13 +18,13 @@ const ProductRegister = (props) => {
     axios
       .post("/api/products/sendproduct", data)
       .then((response) => {
-        props.setRegisteredProduct(response.data)
+        props.setRegisteredProduct(response.data);
         props.setStage(1);
         if (props.showAll) {
           props.setShowAll(false);
-          setTimeout(() =>{
+          setTimeout(() => {
             props.setShowAll(true);
-          },100)
+          }, 100);
         }
       })
       .catch((e) => {
@@ -28,7 +33,7 @@ const ProductRegister = (props) => {
   }
 
   return (
-    <RegisterProdStyle>
+    <RegisterProdStyle Colors={Colors} darkMode={darkMode}>
       <h1>Cadastrar Novo Produto</h1>
       <label>Nome:</label>
       <input
@@ -49,14 +54,14 @@ const ProductRegister = (props) => {
         onChange={(e) => setPrice(e.target.value)}
       ></input>
       <label>Descrição:</label>
-      <input
+      <textarea
         required
         type="text"
         name="description"
         value={description}
         placeholder="Descrição"
         onChange={(e) => setDescription(e.target.value)}
-      ></input>
+      ></textarea>
       <label>Código de barras:</label>
       <input
         required

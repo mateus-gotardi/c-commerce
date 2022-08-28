@@ -16,10 +16,14 @@ const GlobalStyle = createGlobalStyle`
   a{
     color:inherit;
     text-decoration: none;
+    cursor:pointer;
   }
   * {
     box-sizing: border-box;
     font-size:1rem;
+  }
+  button{
+    cursor:pointer;
   }
 `;
 

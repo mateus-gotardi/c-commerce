@@ -5,6 +5,9 @@ export const FiltersStyle = styled.div`
   gap: 1rem;
   margin: 1rem;
   align-items: center;
+  span {
+    cursor: pointer;
+  }
   .selected-tag {
     font-size: 0.8rem;
     background-color: ${(props) =>

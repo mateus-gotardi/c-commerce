@@ -3,8 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Header, ProductDetails } from "../src/components";
 import { useRouter } from "next/router";
-
-const ProductPage = (props) => {
+const ProductPage = () => {
   const router = useRouter();
   const { productid } = router.query;
   const [token, setToken] = useState("");
@@ -16,7 +15,7 @@ const ProductPage = (props) => {
   }, [setToken]);
   const addToCart = (e) => {
     e.preventDefault();
-    console.log(token)
+    console.log(token);
     if (token) {
       let data = { productid };
       axios
@@ -24,7 +23,7 @@ const ProductPage = (props) => {
           headers: { "x-access-token": token },
         })
         .then((response) => {
-          console.log('item added to cart successfully');
+          console.log("item added to cart successfully");
         })
         .catch((e) => {
           console.log(e);
@@ -35,12 +34,12 @@ const ProductPage = (props) => {
       if (!cart) {
         let data = JSON.stringify([productid]);
         localStorage.setItem("cart", data);
-        console.log('item added to cart successfully');
+        console.log("item added to cart successfully");
       } else {
         cart = JSON.parse(cart);
         cart.push(productid);
         localStorage.setItem("cart", JSON.stringify(cart));
-        console.log('item added to cart successfully');
+        console.log("item added to cart successfully");
       }
     }
   };
@@ -49,8 +48,7 @@ const ProductPage = (props) => {
       <Header></Header>
       {productid && (
         <>
-          <ProductDetails productid={productid} />
-          <button onClick={addToCart}>Add to cart</button>
+          <ProductDetails productid={productid} addToCart={addToCart} />
         </>
       )}
     </div>

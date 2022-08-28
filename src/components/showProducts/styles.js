@@ -34,6 +34,7 @@ export const ShowStyle = styled.div`
     display: flex;
     gap: 0.5rem;
     flex-wrap: wrap;
+    justify-content: center;
     .tag {
       font-size: 0.8rem;
       background-color: ${(props) =>

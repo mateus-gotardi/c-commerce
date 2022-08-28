@@ -1,5 +1,5 @@
 import Head from "next/head";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import {
@@ -7,10 +7,32 @@ import {
   ShowProducts,
   ProductRegister,
   ProductDetails,
+  Colors,
 } from "../src/components";
 import axios from "axios";
+import styled from "styled-components";
+import AppContext from "../AppContext";
+
+const AdminStyles = styled.div`
+  .top-buttons {
+    padding: 1rem 1rem 0.5rem 1rem;
+  }
+  .button {
+    border: none;
+    box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.1);
+    background-color: ${(props) =>
+      props.darkMode ? props.Colors.White : props.Colors.DarkBlue};
+    border-radius: 5px;
+    padding: 0.3rem 0.7rem;
+    color: ${(props) =>
+      props.darkMode ? props.Colors.MuchDarkBlue : props.Colors.White};
+    margin: 0.5rem 1rem;
+  }
+`;
 
 export default function Admin() {
+  const value = useContext(AppContext);
+  let { darkMode } = value.state;
   const router = useRouter();
   const [admin, setAdmin] = useState(false);
   const [stage, setStage] = useState(0);
@@ -52,7 +74,8 @@ export default function Admin() {
         setStage(0);
         setTimeout(() => {
           setStage(1);
-        },50)
+        }, 50);
+        router.push("#start");
       })
       .catch((e) => {
         console.log(e);
@@ -66,19 +89,23 @@ export default function Admin() {
   return (
     <>
       {admin && (
-        <div>
+        <AdminStyles Colors={Colors} darkMode={darkMode}>
           <Head>
             <title>Painel Admin</title>
             <meta name="description" content="Admin Panel" />
             <link rel="icon" href="/favicon.ico" />
           </Head>
           <Header admin />
-          <button onClick={() => setShowAll(!showAll)}>
-            Mostrar todos os produtos
-          </button>
-          {stage !== 0 && (
-            <button onClick={backToRegister}>Registrar novo produto</button>
-          )}
+          <section className="top-buttons" id="start">
+            <button className="button" onClick={() => setShowAll(!showAll)}>
+              Mostrar todos os produtos
+            </button>
+            {stage !== 0 && (
+              <button className="button" onClick={backToRegister}>
+                Registrar novo produto
+              </button>
+            )}
+          </section>
           {stage === 0 && (
             <ProductRegister
               setStage={setStage}
@@ -95,6 +122,7 @@ export default function Admin() {
                 admin
                 setShowAll={setShowAll}
                 showAll={showAll}
+                getAllProducts={getAllProducts}
               />
             </>
           )}
@@ -109,7 +137,7 @@ export default function Admin() {
               tagsFilter={[]}
             />
           )}
-        </div>
+        </AdminStyles>
       )}
     </>
   );

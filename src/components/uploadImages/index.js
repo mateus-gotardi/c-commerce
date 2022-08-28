@@ -1,7 +1,13 @@
 import { useState } from "react";
 import axios from "axios";
+import { UploadStyle } from "./styles";
+import AppContext from "../../../AppContext";
+import React, { useContext } from "react";
+import { Colors } from "..";
 
 const UploadImages = (props) => {
+  const value = useContext(AppContext);
+  let { darkMode } = value.state;
   const [images, setImages] = useState([]);
   const [alt, setAlt] = useState("");
   const uploadImages = (e) => {
@@ -37,20 +43,24 @@ const UploadImages = (props) => {
   };
 
   return (
-    <div>
+    <UploadStyle Colors={Colors} darkMode={darkMode}>
+      <h2>Adicionar Imagem:</h2>
       <form onSubmit={uploadImages}>
-        <label to="file">Upload de imagens</label>
-        <input
-          required
-          type="file"
-          id="imageInput"
-          name="file"
-          onChange={(e) => setImages(e.target.files[0])}
-        />
+        <label for="file" className="imageLabel">
+          Selecionar Imagem
+          <input
+            required
+            type="file"
+            id="file"
+            name="file"
+            onChange={(e) => setImages(e.target.files[0])}
+          />
+        </label>
+        <br />
         <br />
         <label>Texto alternativo</label>
         <input
-          placeholder="alt"
+          placeholder="Descrição da imagem"
           required
           type="text"
           value={alt}
@@ -59,8 +69,7 @@ const UploadImages = (props) => {
         <br />
         <button type="submit">enviar imagem</button>
       </form>
-      <div></div>
-    </div>
+    </UploadStyle>
   );
 };
 
