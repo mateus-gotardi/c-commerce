@@ -1,8 +1,12 @@
 import { FiltersStyle } from "./styles";
-import { useState, useEffect } from "react";
 import TagElement from "./TagElement";
+import { Colors } from "..";
+import { useContext } from "react";
+import AppContext from "../../../AppContext";
 
 const Filters = (props) => {
+  const value = useContext(AppContext);
+  let { darkMode } = value.state;
   const addFilter = (e, tag) => {
     e.preventDefault();
     let tmpTags = props.tagsFilter;
@@ -13,12 +17,15 @@ const Filters = (props) => {
       tmpTags.push(tag);
     }
     props.setTagsFilter(tmpTags);
-    props.setRefresh(true)
-    setTimeout(()=>{props.setRefresh(false)},50)
+    props.setRefresh(true);
+    setTimeout(() => {
+      props.setRefresh(false);
+    }, 50);
   };
 
   return (
-    <FiltersStyle>
+    <FiltersStyle Colors={Colors} darkMode={darkMode}>
+      <h2 className="title">Filtros:</h2>
       <div className="filters">
         {props.allTags.length > 0 &&
           props.allTags.map((tag, key) => {

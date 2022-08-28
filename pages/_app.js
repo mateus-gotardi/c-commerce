@@ -10,6 +10,8 @@ const GlobalStyle = createGlobalStyle`
     color: ${(props) =>
       props.darkMode ? props.Colors.White : props.Colors.MuchDarkBlue};
     font-family: 'Rubik', sans-serif;
+    padding:0;
+    margin:0
   }
   a{
     color:inherit;
@@ -17,6 +19,7 @@ const GlobalStyle = createGlobalStyle`
   }
   * {
     box-sizing: border-box;
+    font-size:1rem;
   }
 `;
 

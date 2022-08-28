@@ -29,5 +29,5 @@ export const adjustPrice = (price) => {
 export const getTags = (productTags) => {
   let clean = productTags.replace(/ /gm, "");
   let tagList = clean.split(",");
-  return tagList;
+  return tagList.sort();
 };

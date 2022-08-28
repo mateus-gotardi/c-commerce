@@ -3,6 +3,9 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Header, ShowProducts, Filters } from "../src/components";
 import { getTags } from "../src/utils/showProductsHelpers";
+import styled from "styled-components";
+
+const HomeStyle = styled.div``;
 
 export default function Home() {
   const [products, setProducts] = useState(null);
@@ -18,6 +21,7 @@ export default function Home() {
       tmpAll.push(...tags);
     });
     let noRepeat = tmpAll.filter((x, i) => tmpAll.indexOf(x) === i);
+    noRepeat.sort()
     setAllTags(noRepeat);
   };
   const getAllProducts = () => {
@@ -37,9 +41,9 @@ export default function Home() {
   }, []);
 
   return (
-    <div>
+    <HomeStyle>
       <Head>
-        <title>Loja Virtual</title>
+        <title>Organizações Tabajara</title>
         <meta
           name="description"
           content="homepage for the e-commerce website"
@@ -61,6 +65,6 @@ export default function Home() {
         tagsFilter={tagsFilter}
         refresh={refresh}
       />
-    </div>
+    </HomeStyle>
   );
 }
