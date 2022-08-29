@@ -1,21 +1,57 @@
 import AppContext from "../../../AppContext";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ShowStyle } from "./styles";
 import { getUrl, adjustPrice, getTags } from "../../utils/showProductsHelpers";
 import { useRouter } from "next/router";
-import { Colors } from "..";
+import { Colors, Filters } from "..";
+import { AiOutlineSearch } from "react-icons/ai";
+import NoResults from "../../SVG/Loading";
 
 const ShowProducts = (props) => {
+  const [search, setSearch] = useState("");
   const value = useContext(AppContext);
   let { darkMode } = value.state;
   const router = useRouter();
-  const { products, productImages, tagsFilter, refresh } = props;
+  const [allTags, setAllTags] = useState();
+  const [tagsFilter, setTagsFilter] = useState([]);
+  const { products, productImages, refresh } = props;
 
+  const getAllTags = () => {
+    let tmpAll = [];
+    products.map((item) => {
+      let tags = getTags(item.tags);
+      tmpAll.push(...tags);
+    });
+    let noRepeat = tmpAll.filter((x, i) => tmpAll.indexOf(x) === i);
+    noRepeat.sort();
+    setAllTags(noRepeat);
+  };
+  useEffect(() => {
+    if (props.products) getAllTags();
+  }, [props]);
   return (
     <ShowStyle Colors={Colors} darkMode={darkMode}>
+      {allTags && (
+        <Filters
+          allTags={allTags}
+          tagsFilter={tagsFilter}
+          setTagsFilter={setTagsFilter}
+          setRefresh={props.setRefresh}
+        />
+      )}
+      <div className="search">
+        <AiOutlineSearch />
+        <input
+          type="search"
+          value={search}
+          onChange={(e) => {
+            setSearch(e.target.value);
+          }}
+        ></input>
+      </div>
+
       <div className="products-container">
-        {products !== null &&
-          !refresh &&
+        {products !== null && !refresh ? (
           products.map((product, key) => {
             let tags;
             if (product.tags.length > 0) {
@@ -35,20 +71,27 @@ const ShowProducts = (props) => {
               }
             };
             const verifyFilter = () => {
-              let include = false;
-              if (tagsFilter.length > 0) {
+              const verifyTags = () => {
+                let conclusion = 0;
                 tags.map((tag) => {
                   if (tagsFilter.includes(tag)) {
-                    include = true;
+                    conclusion += 1;
                   }
                 });
+                return conclusion == tagsFilter.length;
+              };
+              if (!verifyTags()) return false;
+              else if (search.length > 0) {
+                let name = product.name.toLowerCase().replace(/ /gm, "");
+                let tmpSearch = search.toLowerCase().replace(/ /gm, "");
+                if (name.includes(tmpSearch)) {
+                  return true;
+                } else return false;
               } else {
-                include = true;
+                return true;
               }
-              return include;
             };
-            let isFiltered = verifyFilter();
-            if (isFiltered) {
+            if (verifyFilter()) {
               return (
                 <div key={key} className="product" onClick={loadDetails}>
                   {images.length > 0 ? (
@@ -88,7 +131,10 @@ const ShowProducts = (props) => {
                 </div>
               );
             }
-          })}
+          })
+        ) : (
+          <NoResults></NoResults>
+        )}
       </div>
     </ShowStyle>
   );

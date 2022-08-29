@@ -1,5 +1,5 @@
 import { CartStyles } from "./styles";
-import { useEffect, useState, useContext} from "react";
+import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { getUrl, adjustPrice } from "../../utils/showProductsHelpers";
@@ -52,6 +52,15 @@ const CartItemsDetails = () => {
         console.log(e);
       });
   };
+  useEffect(() => {
+    let token = Cookies.get("token");
+    if (token) {
+      setToken(token);
+      getCartItems(token);
+    } else {
+      getLocalCartItems();
+    }
+  }, []);
   const removeItemFromDB = (e, id) => {
     e.preventDefault();
     axios
@@ -83,16 +92,6 @@ const CartItemsDetails = () => {
     router.push("/refresh?page=cart");
   };
 
-  useEffect(() => {
-    let token = Cookies.get("token");
-    if (token) {
-      setToken(token);
-      getCartItems(token);
-    } else {
-      getLocalCartItems();
-    }
-  }, []);
-
   const getTotal = (cart) => {
     let tempTotal = 0;
     setTimeout(
@@ -122,11 +121,11 @@ const CartItemsDetails = () => {
 
   const ListOfProducts = (props) => {
     return props.cart.map((item, key) => {
-      let productToShow = allProducts.products.filter((obj) => {
+      let productToShow = allProducts.products.filter((prod) => {
         if (item.productid) {
-          return obj.id == item.productid;
+          return prod.id == item.productid;
         } else {
-          return obj.id == item;
+          return prod.id == item;
         }
       });
       let image = allProducts.productImages.filter((obj) => {

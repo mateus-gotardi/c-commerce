@@ -2,12 +2,32 @@ import styled from "styled-components";
 
 export const ShowStyle = styled.div`
   padding: 1rem;
+  .search {
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    padding: .5rem;
+    box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+    background-color: ${(props) =>
+      props.darkMode ? props.Colors.DarkBlue : props.Colors.White};
+    input {
+      background-color: inherit;
+      border: none;
+      color: ${(props) =>
+        props.darkMode ? props.Colors.White : props.Colors.MuchDarkBlue};
+      :focus {
+        border: none;
+        outline: none;
+      }
+    }
+  }
   .products-container {
     width: fit-content;
     display: grid;
     grid-template-columns: auto;
     justify-items: center;
-    gap:  3rem 1rem;
+    gap: 3rem 1rem;
     .product {
       border-radius: 5px;
       box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.1);

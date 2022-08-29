@@ -40,6 +40,7 @@ export default function Admin() {
   const [registeredProduct, setRegisteredProduct] = useState(null);
   const [products, setProducts] = useState(null);
   const [productImages, setProductImages] = useState(null);
+  const [refresh, setRefresh] = useState(false);
 
   const getAllProducts = () => {
     axios
@@ -134,7 +135,7 @@ export default function Admin() {
               showAll={showAll}
               products={products}
               productImages={productImages}
-              tagsFilter={[]}
+              setRefresh={setRefresh}
             />
           )}
         </AdminStyles>
