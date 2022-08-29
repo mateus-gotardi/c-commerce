@@ -5,7 +5,6 @@ import { getUrl, adjustPrice, getTags } from "../../utils/showProductsHelpers";
 import { useRouter } from "next/router";
 import { Colors, Filters } from "..";
 import { AiOutlineSearch } from "react-icons/ai";
-import NoResults from "../../SVG/Loading";
 
 const ShowProducts = (props) => {
   const [search, setSearch] = useState("");
@@ -133,7 +132,7 @@ const ShowProducts = (props) => {
             }
           })
         ) : (
-          <NoResults></NoResults>
+          <></>
         )}
       </div>
     </ShowStyle>
