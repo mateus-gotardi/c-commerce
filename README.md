@@ -53,7 +53,7 @@ Requisitos:
         success(boolean)<br/>
         }<br/>
         status(400), response data = { error(boolean), message(string) }<br/>
-  <br/>
+         <br/>
   - /cart WithAuth*<br/>
       POST req body = {productid}<br/>
         res.status(200) response data = { message(string) };<br/>
@@ -61,16 +61,16 @@ Requisitos:
       GET WithAuth*<br/>
          res.status(200) response data = { items(obj) };<br/>
          res.status(401) response data = { message(string) };<br/>
-<br/>
+      <br/>
   - /removefromcart - POST req body = {productid(string)}<br/>
         res.status(200) response data = { message(string) };<br/>
 
 - api/products
   - /getall - GET response data = {products(array), productImages(array)}<br/>
-  <br/>
+      <br/>
   - /getone - POST req body = {id(string)}<br/>
         res.status(200) response data = {product(obj), productImages(array)}<br/>
-  <br/>
+      <br/>
   - /sendproduct - POST req body = {name(string), price(number), description(string), bar_code(string), tags(string, tags separadas por virgula)}<br/>
         res.status(200) response data = {product(obj)}<br/>
         <br/>
