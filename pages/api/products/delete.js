@@ -20,7 +20,7 @@ export default async (req, res) => {
           id: req.body.id,
         },
       });
-      res.status(201).send("Product deleted successfully");
+      res.status(201).json({ message: "Product deleted successfully" });
     } catch (error) {
       console.log(error);
       res.status(400).json(error);
