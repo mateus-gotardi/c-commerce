@@ -56,6 +56,3 @@ CREATE TABLE "public.Users" (
 ALTER TABLE "CartItem" ADD CONSTRAINT "CartItem_fk0" FOREIGN KEY ("userId") REFERENCES "Users"("id");
 ALTER TABLE "CartItem" ADD CONSTRAINT "CartItem_fk1" FOREIGN KEY ("productid") REFERENCES "Products"("id");
 ALTER TABLE "productImages" ADD CONSTRAINT "productImages_fk0" FOREIGN KEY ("productid") REFERENCES "Products"("id");
-
-
-

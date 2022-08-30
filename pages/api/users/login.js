@@ -17,7 +17,7 @@ const login = async (req, res) => {
       user.isCorrectPassword(password, function (err, same) {
         if (!same) {
           res
-            .status(401)
+            .status(400)
             .json({ error: true, message: "E-mail ou senha incorretos" });
         } else {
           const token = jwt.sign({ email }, secret, { expiresIn: "2d" });

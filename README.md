@@ -1,17 +1,18 @@
 # One Bit Code - Loja virtual (teste técnico)
 
-Essa é a solução apresentada para o desafio de simulação de processo seletivo realizada com os alunos do curso Programador Full Stack Javascript  Profissional.
+Essa é a solução apresentada para o desafio de simulação de processo seletivo realizada com os alunos do curso Programador Full Stack Javascript Profissional.
 
 ## Índice
 
 - [O Desafio](#o-desafio)
 - [Screenshot](#screenshot)
 - [Funcionalidades](#funcionalidades)
+- [Rotas](#Rotas)
 - [Meu Processo](#meu-processo)
   - [Feito com](#feito-com)
   - [Banco de dados](#banco-de-dados)
   - [Ordem de Trabalho](#ordem-de-trabalho)
-  
+
 ## O Desafio
 
 Desenvolva uma aplicação para manipulação de produtos, que tenha como principais funcionalidades o CRUD básico e um carrinho para armazenar os produtos que o cliente esteja interessado em comprar. Você poderá escolher as tecnologias utilizadas e o layout/design da aplicação.
@@ -27,15 +28,64 @@ Requisitos:
 
 ### Funcionalidades
 
-- Autenticação: 
+- Autenticação:
   - O usuário não precisa se registrar para utilizar o site e colocar itens no carrinho, os itens ficarão armazenados localmente nesse caso.
   - Ao logar os itens do carrinho local são armazenados no banco de dados
-- Painel Admin: o admin é setado manualmente no banco de dados por questões de segurança, logando com um usuário admin é possivel criar, modificar e excluir produtos.
-- Filtro de Itens: na tela inicial e no painel admin é possivel filtrar os produtos por nome e/ou tags
+- Painel Admin: o admin é registrado manualmente no banco de dados por questões de segurança, logando com um usuário admin é possível criar, modificar e excluir produtos.
+- Filtro de Itens: na tela inicial e no painel admin é possível filtrar os produtos por nome e/ou tags
 - Carrinho:
   - Na tela de detalhes do produto é possível adicionar itens ao carrinho
   - Na tela carrinho são listados todos os itens no carrinho do usuário, além do calor total dos produtos.
 
+ ### Rotas
+
+- Middleware* WithAuth: req.headers["x-access-token"]
+
+- api/users
+  - /register - POST req body = { name, email, password } <br/> 
+        res: status(200), response data ={success(boolean), message(string), user(obj)} <br/>
+             status(400), response data = { error(boolean), message(string) }<br/>
+             <br/>
+  - /login - POST req body = { email(string), password(string) }<br/>
+        res: res.status(200). response data = {<br/>
+        user: { email(string), name(string), admin(boolean) },<br/>
+        token(string, JWT token),<br/>
+        success(boolean)<br/>
+        }<br/>
+        status(400), response data = { error(boolean), message(string) }<br/>
+  <br/>
+  - /cart WithAuth*<br/>
+      POST req body = {productid}<br/>
+        res.status(200) response data = { message(string) };<br/>
+        status(400), response data = { error(boolean), message(string) }<br/>
+      GET WithAuth*<br/>
+         res.status(200) response data = { items(obj) };<br/>
+         res.status(401) response data = { message(string) };<br/>
+<br/>
+  - /removefromcart - POST req body = {productid(string)}<br/>
+        res.status(200) response data = { message(string) };<br/>
+
+- api/products
+  - /getall - GET response data = {products(array), productImages(array)}<br/>
+  <br/>
+  - /getone - POST req body = {id(string)}<br/>
+        res.status(200) response data = {product(obj), productImages(array)}<br/>
+  <br/>
+  - /sendproduct - POST req body = {name(string), price(number), description(string), bar_code(string), tags(string, tags separadas por virgula)}<br/>
+        res.status(200) response data = {product(obj)}<br/>
+        <br/>
+  - /update - POST req body = {field('name', 'tags', 'price', 'description'), id(string), newValue(string)}<br/>
+        res.status(200) response data = {product(obj)}<br/>
+        <br/>
+  - /uploadimage - POST req body = {formData={file, infos}, headers= "Content-Type": "application/json" }
+        res.status(200) response data = { success(boolean), productImage(obj) }<br/>
+        <br/>
+  - /deleteimage - POST req body = {id(string)}<br/>
+        res.status(200) response data = { message(string) }<br/>
+        <br/>
+  - /delete - POST req body = {id(string)}<br/>
+        res.status(200) response data = { message(string) }<br/>
+      
 ## Meu Processo
 
 ### Feito Com
