@@ -35,7 +35,7 @@ Requisitos:
 - Filtro de Itens: na tela inicial e no painel admin é possível filtrar os produtos por nome e/ou tags
 - Carrinho:
   - Na tela de detalhes do produto é possível adicionar itens ao carrinho
-  - Na tela carrinho são listados todos os itens no carrinho do usuário, além do calor total dos produtos.
+  - Na tela carrinho são listados todos os itens no carrinho do usuário, além do valor total dos produtos.
 
  ### Rotas
 
